@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% block post %}
+{% load static %}
+ 
+ <div class="single-news">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="sn-container">
+		<section class="blog-list px-3 py-5 p-md-5">
+		    <div class="container">
+			    <div class="item mb-5">
+				{% for record in object_list %}
+				    <div class="media">
+					    {% comment %} <img class="mr-3 img-fluid post-thumb d-none d-md-flex" src={% static "img/blog/blog-post-thumb-1.jpg" %} alt="image"> {% endcomment %}
+					    <div class="media-body">
+						    <h3 class="title mb-1">
+							<a href={% url 'hposts_page' record.id %} rel="bookmark">{{ record.title|truncatechars:20 }}</a></h3>
+							<div class="mb-2" style="font-size: 13px;">
+								{% for tag in record.tags.all %}
+								<a href={% url 'hposts_page' %}?page=1&tag={{tag.name}}rel="category tag">{{ tag.name }}</a>
+								{% endfor %}
+								<span class="px-1">/</span>
+								<span>{{ record.create }}</span>
+							</div>
+							<span class="cat-links">
+                        	Posted in
+                        	{% for tag in record.tags.all %}
+                        	<a href={% url 'hposts_page' %}?page=1&tag={{tag.name}}rel="category tag">{{ tag.name }}</a>,
+                        	{% endfor %}
+                        	</span>
+						    <div class="intro">
+							<p>
+                            	{{ record.text|truncatechars:200 }} <a class="more-link" href={% url 'hposts_page' record.id %} ></a>
+                        	</p>
+							</div>
+						    <a class="more-link" href="blog-post.html">Read more &rarr;</a>
+							
+					    </div><!--//media-body-->
+						
+				    </div><!--//media-->
+			    {% endfor %}
+				</div><!--//item-->
+
+			
+			    
+			    <nav class="blog-nav nav nav-justified my-5">
+				  <a class="nav-link-prev nav-item nav-link d-none rounded-left" href="#">Previous<i class="arrow-prev fas fa-long-arrow-alt-left"></i></a>
+				  <a class="nav-link-next nav-item nav-link rounded" href="blog-list.html">Next<i class="arrow-next fas fa-long-arrow-alt-right"></i></a>
+				</nav>
+				
+		    </div>
+	    </section>
+                </div>
+
+            </div>
+
+            {% include "bar.html" %}
+        </div>
+    </div>
+</div> 
+
+
+
+
+{% endblock post %}

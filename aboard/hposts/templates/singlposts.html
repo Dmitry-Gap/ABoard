@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block post %}
+
+<body>
+<div class="container-fluid py-3">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="position-relative mb-3">
+                    <img class="img-fluid w-100"
+                    src="img/news-700x435-2.jpg"
+                    style="object-fit: cover;">
+                    <div class="overlay position-relative bg-light">
+                        <div class="mb-3">
+                            {% for tag in object.tags.all %}
+                            <a href={% url 'hposts_page' %}?page=1&tag={{tag.name}} rel="category tag">{{ tag.name }}</a>
+                            {% endfor %}
+                                <span class="px-1">/</span>
+                                <span>{{object.create}}</span>
+                                <span class="px-1">/</span>
+                                {% if object.user.first_name %}
+                                {{object.user.first_name}}
+                                {% else %}
+                                {{object.user.username}}
+                                {% endif %}
+                        </div>
+                    <div>
+                        <h3 class="mb-3">{{object.title}}</h3>
+                        <p>{{object.text}}</p>
+                    </div>
+                </div>
+            </div>
+                {% include "comments.html" %}
+                </div>
+                {% include "bar.html" %}
+            </div>
+        </div>
+    </div>
+    </div>
+</body>
+
+{% endblock post %}

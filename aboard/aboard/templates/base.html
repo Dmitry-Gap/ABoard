@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ru">
+    <head>
+        <meta charset="utf-8">
+        <title>Bootstrap News Template - Free HTML Templates</title>
+        <meta content="width=device-width, initial-scale=1.0" name="viewport">
+        <meta content="Bootstrap News Template - Free HTML Templates" name="keywords">
+        <meta content="Bootstrap News Template - Free HTML Templates" name="description">
+        <link href="img/favicon.ico" rel="icon">
+        {% comment %} style {% endcomment %}
+        {% include "styles.html" %}
+    </head>
+    <body>
+    {% include 'topbar.html' %}
+    {% include 'brand.html' %}
+    {% include 'navbar.html' %}
+    
+    
+    {% block post %}{% endblock post %}
+
+    {% comment %} {% block home %}{% endblock home %} {% endcomment %}
+    {% block contact %}{% endblock contact %}
+    {% block login %}{% endblock login %}
+    {% block registration %}{% endblock registration %}
+    
+
+    {% include 'footer.html' %}
+
+    {% include 'script.html' %}
+
+
+
+    <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
+    </body>
+</html>

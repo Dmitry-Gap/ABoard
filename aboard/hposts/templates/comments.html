@@ -1,0 +1,232 @@
+
+{% comment %} <div id="comments" class="comments-area">
+    <div id="respond" class="comment-respond">
+        <h3 id="reply-title" class="comment-reply-title">Leave a Reply
+            <small>
+                <a
+                    rel="nofollow"
+                    id="cancel-comment-reply-link"
+                    href="/demo-moschino/embed-audio/#respond"
+                    style="display:none;"
+                >Cancel reply</a>
+            </small>
+        </h3>
+        <form
+            action="http://www.themepush.com/demo-moschino/wp-comments-post.php"
+            method="post"
+            id="commentform"
+            class="comment-form"
+            novalidate=""
+        >
+            <p class="comment-notes">
+                <span id="email-notes">Your email address will not be published.</span> Required fields are marked
+                <span class="required">*</span>
+            </p>
+            <p class="comment-form-comment">
+                <label for="comment">Comment</label>
+                <textarea
+                    id="comment"
+                    name="comment"
+                    cols="45"
+                    rows="8"
+                    aria-required="true"
+                    required="required"
+                ></textarea>
+            </p>
+            <p class="comment-form-author">
+                <label for="author">Name
+                    <span class="required">*</span>
+                </label>
+                <input
+                    id="author"
+                    name="author"
+                    type="text"
+                    value=""
+                    size="30"
+                    aria-required="true"
+                    required="required"
+                >
+            </p>
+            <p class="comment-form-email">
+                <label for="email">Email
+                    <span class="required">*</span>
+                </label>
+                <input
+                    id="email"
+                    name="email"
+                    type="email"
+                    value=""
+                    size="30"
+                    aria-describedby="email-notes"
+                    aria-required="true"
+                    required="required"
+                >
+            </p>
+            <p class="comment-form-url">
+                <label for="url">Website</label>
+                <input
+                    id="url"
+                    name="url"
+                    type="url"
+                    value=""
+                    size="30"
+                >
+            </p>
+            <p class="form-submit">
+                <input
+                    name="submit"
+                    type="submit"
+                    id="submit"
+                    class="submit"
+                    value="Post Comment"
+                >
+                <input
+                    type="hidden"
+                    name="comment_post_ID"
+                    value="90"
+                    id="comment_post_ID"
+                >
+                <input
+                    type="hidden"
+                    name="comment_parent"
+                    id="comment_parent"
+                    value="0"
+                >
+            </p>
+            <noscript></noscript>
+        </form>
+    </div>
+    <!-- #respond -->
+</div>
+<!-- #comments -->  {% endcomment %}
+
+<section id="comments_page">
+    <div class="header">
+        <h3>Коментарии</h3>
+    </div>
+    <form
+        class="wpcf7"
+        method="post"
+        id="contactform"
+        action={% url 'post_comment' object.id %}
+        >
+        {% csrf_token %}
+        <div class="form">
+            <p>
+                {{ comment_form.name }}
+            </p>
+            <p>
+                {{ comment_form.email }}
+            </p>
+            <p>
+                {{ comment_form.body }}
+            </p>
+            <button class="btn"type="submit"
+                id="submit"
+                class="clearfix btn"
+                value="Send">Send Message
+            </button></div>
+        </div>
+    </form>
+</section>
+
+
+{% comment %} <div class="bg-light mb-3" style="padding: 30px;">
+    <h3 class="mb-4">Comments</h3>
+    <div class="media mb-4">
+        <img src="img/user.jpg" alt="Image" class="img-fluid mr-3 mt-1" style="width: 45px;">
+        <div class="media-body">
+            <h6><a href={{ comment_form.user}}</a> <small><i>{{ comment_form.create}}</i></small></h6>
+            <p>{{ comment_form.comment }}</p>
+            <button class="btn btn-sm btn-outline-secondary">Reply</button>
+        </div>
+    </div>
+    <div class="media">
+        <img src="img/user.jpg" alt="Image" class="img-fluid mr-3 mt-1" style="width: 45px;">
+        <div class="media-body">
+            <h6><a href="">John Doe</a> <small><i>01 Jan 2045 at 12:00pm</i></small></h6>
+            <p>Diam amet duo labore stet elitr invidunt ea clita ipsum voluptua, tempor labore
+                accusam ipsum et no at. Kasd diam tempor rebum magna dolores sed sed eirmod ipsum.
+                Gubergren clita aliquyam consetetur sadipscing, at tempor amet ipsum diam tempor
+                consetetur at sit.</p>
+            <button class="btn btn-sm btn-outline-secondary">Reply</button>
+            <div class="media mt-4">
+                <img src="img/user.jpg" alt="Image" class="img-fluid mr-3 mt-1"
+                    style="width: 45px;">
+                <div class="media-body">
+                    <h6><a href="">John Doe</a> <small><i>01 Jan 2045 at 12:00pm</i></small></h6>
+                    <p>Diam amet duo labore stet elitr invidunt ea clita ipsum voluptua, tempor
+                        labore accusam ipsum et no at. Kasd diam tempor rebum magna dolores sed sed
+                        eirmod ipsum. Gubergren clita aliquyam consetetur sadipscing, at tempor amet
+                        ipsum diam tempor consetetur at sit.</p>
+                    <button class="btn btn-sm btn-outline-secondary">Reply</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="bg-light mb-3" style="padding: 30px;">
+    <h3 class="mb-4">Leave a comment</h3>
+    <div id="form">
+    <form>
+        <div class="form-group">
+            <label for="name">Name *</label>
+            <input type="text" class="form-control" id="name"
+            {{ comment_form.user}}>
+        </div>
+        <div class="form-group">
+            <label for="email">Email *</label>
+            <input type="email" class="form-control" id="email"
+            {{ comment_form.email}}>
+        </div>
+        <div class="form-group">
+            <label for="message">Message *</label>
+            <textarea id="message" cols="30" rows="5" class="form-control"
+            {{ comment_form.comment }}
+            ></textarea>
+        </div>
+        <div class="form-group mb-0">
+            <input type="submit" value="Отправить"
+                class="btn btn-primary font-weight-semi-bold py-2 px-3">
+        </div>
+    </form>
+</div>  {% endcomment %}
+{% comment %} <h3 class="mb-4">Comments</h3>
+<div class="blog-comments-section">
+    <div id="disqus_thread"></div>
+    <script>
+        /**
+            *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT 
+            *  THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR 
+            *  PLATFORM OR CMS.
+            *  
+            *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: 
+            *  https://disqus.com/admin/universalcode/#configuration-variables
+            */
+        /*
+        var disqus_config = function () {
+            // Replace PAGE_URL with your page's canonical URL variable
+            this.page.url = PAGE_URL;  
+            
+            // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+            this.page.identifier = PAGE_IDENTIFIER; 
+        };
+        */
+        
+        (function() {  // REQUIRED CONFIGURATION VARIABLE: EDIT THE SHORTNAME BELOW
+            var d = document, s = d.createElement('script');
+            
+            // IMPORTANT: Replace 3wmthemes with your forum shortname!
+            s.src = 'https://3wmthemes.disqus.com/embed.js';
+            
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+    </script>
+    <noscript>
+        Please enable JavaScript to view the 
+        <a href="https://disqus.com/?ref_noscript" rel="nofollow">
+            comments powered by Disqus.
+        </a>
+    </noscript>
+</div><!--//blog-comments-section--> {% endcomment %}
