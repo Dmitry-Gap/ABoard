@@ -1,6 +1,6 @@
 from django.shortcuts import render, HttpResponseRedirect
 from django.contrib.auth import logout, login, authenticate, decorators as dec
-from user.forms import UserForm
+from user.forms import UserForm, UserRegistrationForm
 
 
 def login_page(request):
@@ -35,6 +35,20 @@ def logout_page(request):
     return HttpResponseRedirect("/home/")
 
 
-def regist_page(request):
-    context = {}
-    return render(request, "registration.html", context)
+# def regist_page(request):
+    # context = {}
+    # return render(request, "registration.html", context)
+
+
+def register(request):
+    if request.method == 'POST':
+        user_form = UserRegistrationForm(request.POST)
+        if user_form.is_valid():
+            new_user = user_form.save(commit=False)
+            new_user.set_password(user_form.cleaned_data['password'])
+            new_user.save()
+            return render(request, 'registration.html', {'new_user': new_user})
+    else:
+        user_form = UserRegistrationForm()
+    return render(request, 'registration.html', {'user_form': user_form})
+

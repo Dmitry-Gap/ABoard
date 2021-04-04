@@ -100,7 +100,7 @@
 </div>
 <!-- #comments -->  {% endcomment %}
 
-<section id="comments_page">
+{% comment %} <section id="comments_page">
     <div class="header">
         <h3>Коментарии</h3>
     </div>
@@ -128,61 +128,40 @@
             </button></div>
         </div>
     </form>
-</section>
+</section> {% endcomment %}
+<h3 class="mb-4">Коментарии</h3>
+    <div class="one_comment">
+        <div class="comment_date">
 
-
-{% comment %} <div class="bg-light mb-3" style="padding: 30px;">
-    <h3 class="mb-4">Comments</h3>
-    <div class="media mb-4">
-        <img src="img/user.jpg" alt="Image" class="img-fluid mr-3 mt-1" style="width: 45px;">
-        <div class="media-body">
-            <h6><a href={{ comment_form.user}}</a> <small><i>{{ comment_form.create}}</i></small></h6>
-            <p>{{ comment_form.comment }}</p>
-            <button class="btn btn-sm btn-outline-secondary">Reply</button>
-        </div>
-    </div>
-    <div class="media">
-        <img src="img/user.jpg" alt="Image" class="img-fluid mr-3 mt-1" style="width: 45px;">
-        <div class="media-body">
-            <h6><a href="">John Doe</a> <small><i>01 Jan 2045 at 12:00pm</i></small></h6>
-            <p>Diam amet duo labore stet elitr invidunt ea clita ipsum voluptua, tempor labore
-                accusam ipsum et no at. Kasd diam tempor rebum magna dolores sed sed eirmod ipsum.
-                Gubergren clita aliquyam consetetur sadipscing, at tempor amet ipsum diam tempor
-                consetetur at sit.</p>
-            <button class="btn btn-sm btn-outline-secondary">Reply</button>
-            <div class="media mt-4">
-                <img src="img/user.jpg" alt="Image" class="img-fluid mr-3 mt-1"
-                    style="width: 45px;">
-                <div class="media-body">
-                    <h6><a href="">John Doe</a> <small><i>01 Jan 2045 at 12:00pm</i></small></h6>
-                    <p>Diam amet duo labore stet elitr invidunt ea clita ipsum voluptua, tempor
-                        labore accusam ipsum et no at. Kasd diam tempor rebum magna dolores sed sed
-                        eirmod ipsum. Gubergren clita aliquyam consetetur sadipscing, at tempor amet
-                        ipsum diam tempor consetetur at sit.</p>
-                    <button class="btn btn-sm btn-outline-secondary">Reply</button>
-                </div>
+            <div class="date">
+                <p>{{ comment_forms.name }}</p>
             </div>
         </div>
-    </div>
-</div>
+
+
+
+
 <div class="bg-light mb-3" style="padding: 30px;">
-    <h3 class="mb-4">Leave a comment</h3>
+    <h3 class="mb-4">Коментарии</h3>
     <div id="form">
-    <form>
+    <form
+        class="wpcf7"
+        method="post"
+        id="contactform"
+        action={% url 'post_comment' object.id %}
+        >
+        {% csrf_token %}
         <div class="form-group">
             <label for="name">Name *</label>
-            <input type="text" class="form-control" id="name"
-            {{ comment_form.user}}>
+                {{ comment_form.name }}
         </div>
         <div class="form-group">
             <label for="email">Email *</label>
-            <input type="email" class="form-control" id="email"
-            {{ comment_form.email}}>
+                {{ comment_form.email }}
         </div>
         <div class="form-group">
             <label for="message">Message *</label>
-            <textarea id="message" cols="30" rows="5" class="form-control"
-            {{ comment_form.comment }}
+                {{ comment_form.body }}
             ></textarea>
         </div>
         <div class="form-group mb-0">
@@ -190,7 +169,7 @@
                 class="btn btn-primary font-weight-semi-bold py-2 px-3">
         </div>
     </form>
-</div>  {% endcomment %}
+</div>  
 {% comment %} <h3 class="mb-4">Comments</h3>
 <div class="blog-comments-section">
     <div id="disqus_thread"></div>

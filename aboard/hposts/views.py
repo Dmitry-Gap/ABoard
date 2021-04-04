@@ -2,11 +2,12 @@ from django.shortcuts import render
 from django.urls import reverse
 from django.shortcuts import HttpResponseRedirect
 from django.views.generic import ListView, DetailView
-from hposts.models import Blog, Tags
+from hposts.models import Blog, Tags, Comment
 from hposts.forms import CommentForm
 from django.shortcuts import render, get_object_or_404
 from django.contrib import messages
-
+from django.template.loader import render_to_string
+from django.template.context_processors import csrf
 
 
 
@@ -34,36 +35,6 @@ class OneBlog(DetailView):
         context["comment_form"] = CommentForm()
         return context
 
-# def post_detail(request, slug):
-#     template_name = "post_detail.html"
-#     post = get_object_or_404(Post, slug=slug)
-#     comments = post.comments.filter(active=True).order_by("-created_on")
-#     new_comment = None
-#     # Comment posted
-#     if request.method == "POST":
-#         comment_form = CommentForm(data=request.POST)
-#         if comment_form.is_valid():
-
-#             # Create Comment object but don't save to database yet
-#             new_comment = comment_form.save(commit=False)
-#             # Assign the current post to the comment
-#             new_comment.post = post
-#             # Save the comment to the database
-#             new_comment.save()
-#     else:
-#         comment_form = CommentForm()
-
-#     return render(
-#         request,
-#         template_name,
-#         {
-#             "post": post,
-#             "comments": comments,
-#             "new_comment": new_comment,
-#             "comment_form": comment_form,
-#         },
-#     )
-
 
 def add_comment(request, post_id):
     '''
@@ -79,3 +50,56 @@ def add_comment(request, post_id):
             messages.info(request, 'Ошибка добавления коментария')
             messages.info(request, 'Проверьте введенные данные')
     return HttpResponseRedirect(reverse("hposts_page", args=(post_id, )))
+    
+
+
+# class OneCom(DetailView):
+#     model = Comment
+#     template_name = "comments.html"
+
+#     def get_context_data(self, **kwargs):
+#         contexts = super().get_context_data(**kwargs)
+#         contexts["comment_form"] = CommentForm()
+#         return contexts
+
+def view_comment(request, post_id, body):
+    template_name = "comments.html"
+    post = get_object_or_404(Comment, post_id=post_id)
+    comments = Comment.objects.filter(active=True).order_by("-created_on")
+    # if comment_forms.is_valid():
+    #     new_comment.post = post
+    #     new_comment.save()
+    # else:
+    comment_forms = CommentForm()
+
+    return render(
+        request,
+        template_name,
+        {
+            "body": body,
+            "comments": comments,
+            # "new_comment": new_comment,
+            "comment_forms": comment_forms,
+        },
+    )
+   
+
+
+
+# def view_comment(request, active, post_id):
+#     '''
+#     добавление на страницу списка добавленных комментариев
+#     '''
+#     all_comments = Comment.objects.filter(
+#         active=True
+#     )
+#     data = {
+#         'comments_form': False,
+#         'all_comments': all_comments
+#     }
+#     comments_forms = CommentsForm(initial={
+#         'post': post_id(request)
+#     })
+#     data['comments_form'] = comments_forms
+#     data.update(csrf(request))
+#     return render_to_string('comments.html', data)
