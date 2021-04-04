@@ -33,6 +33,14 @@ class User(AbstractUser):
         max_length=1,
         verbose_name="Sex.",
     )
+    date_of_birth = models.DateField(
+        blank=True, 
+        null=True
+    )
+    photo = models.ImageField(
+        upload_to='users/%Y/%m/%d',
+        blank=True
+    )
     # avatar = models.ImageField(
     #     upload_to=path_upload,
     #     verbose_name="Avatar",

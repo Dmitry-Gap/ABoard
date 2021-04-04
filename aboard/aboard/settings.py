@@ -123,5 +123,6 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / "aboard" / "static"
-
+MEDIA_URL = "/media/"
+MEDIA_ROOT = BASE_DIR / "aboard" / "media"
 AUTH_USER_MODEL = "user.User"

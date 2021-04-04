@@ -7,13 +7,13 @@ class UserForm(forms.ModelForm):
     class Meta:
         model=User
         fields = ("username", "password")
+        list_display = ['users', 'date_of_birth', 'photo']
         widgets = {
             "password": forms.PasswordInput()
         }
 
     def clean(self):
         return self.cleaned_data
-
 
 
 class UserRegistrationForm(forms.ModelForm):
@@ -30,3 +30,13 @@ class UserRegistrationForm(forms.ModelForm):
             raise forms.ValidationError('Passwords don\'t match.')
         return cd['password2']
 
+
+class UserEditForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ('first_name', 'username', 'email')
+
+class ProfileEditForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ('date_of_birth', 'photo')

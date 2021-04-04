@@ -62,44 +62,46 @@ def add_comment(request, post_id):
 #         contexts["comment_form"] = CommentForm()
 #         return contexts
 
-def view_comment(request, post_id, body):
-    template_name = "comments.html"
-    post = get_object_or_404(Comment, post_id=post_id)
-    comments = Comment.objects.filter(active=True).order_by("-created_on")
-    # if comment_forms.is_valid():
-    #     new_comment.post = post
-    #     new_comment.save()
-    # else:
-    comment_forms = CommentForm()
+# def view_comment(request, post_id, body):
+#     template_name = "comments.html"
+#     post = get_object_or_404(Comment, post_id=post_id)
+#     comments = Comment.objects.filter(active=True).order_by("-created_on")
+#     if comment_forms.is_valid():
+#         new_comment.post = post
+#         new_comment.save()
+#         # return render(request, {'user_form': user_form } 
+#     else:
+#         comment_forms = CommentForm()
 
-    return render(
-        request,
-        template_name,
-        {
-            "body": body,
-            "comments": comments,
-            # "new_comment": new_comment,
-            "comment_forms": comment_forms,
-        },
-    )
+#     return render(
+#         request,
+#         template_name,
+#         {
+#             "body": body,
+#             "comments": comments,
+#             # "new_comment": new_comment,
+#             "comment_forms": comment_forms,
+#         },
+#     )
    
 
 
 
-# def view_comment(request, active, post_id):
-#     '''
-#     добавление на страницу списка добавленных комментариев
-#     '''
-#     all_comments = Comment.objects.filter(
-#         active=True
-#     )
-#     data = {
-#         'comments_form': False,
-#         'all_comments': all_comments
-#     }
-#     comments_forms = CommentsForm(initial={
-#         'post': post_id(request)
-#     })
-#     data['comments_form'] = comments_forms
-#     data.update(csrf(request))
-#     return render_to_string('comments.html', data)
+def view_comment(request, active, post_id):
+    '''
+    добавление на страницу списка добавленных комментариев
+    '''
+    all_comments = Comment.objects.filter(
+        active=True
+    )
+    data = {
+        'comments_form': False,
+        'all_comments': all_comments
+    }
+    if add(request):
+        comments_forms = CommentsForm(initial={
+            'post': post(request)
+        })
+        data['comments_form'] = comments_forms
+    data.update(csrf(request))
+    return render('comments.html', data)

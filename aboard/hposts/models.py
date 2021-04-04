@@ -74,7 +74,10 @@ class Comment(models.Model):
         verbose_name="Content."
     )
     created_on = models.DateTimeField(auto_now_add=True)
-    active = models.BooleanField(default=False)
+    active = models.BooleanField(
+        blank=True,
+        default=False
+        )
 
 
     class Meta:

@@ -129,14 +129,16 @@
         </div>
     </form>
 </section> {% endcomment %}
-<h3 class="mb-4">Коментарии</h3>
     <div class="one_comment">
         <div class="comment_date">
-
-            <div class="date">
-                <p>{{ comment_forms.name }}</p>
+            <div class="username">
+                <p>{{ data.created_on|date:"d.m.Y" }}</p>
             </div>
         </div>
+
+        <p class="comment_content">{{ data.comment }}</p>
+    </div>
+
 
 
 

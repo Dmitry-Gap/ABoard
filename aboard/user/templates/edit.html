@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block edit %}
+
+
+<h1>Edit your account</h1>
+    <p>You can edit your account using the following form:</p>
+    <form  class="wpcf7" action={% url 'user_edit'  %} method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+        {{ user_form.as_p }}
+        {{ profile_form.as_p }}
+        <p><input type="submit" value="Save changes"></p>
+    </form>
+{% endblock edit %}
