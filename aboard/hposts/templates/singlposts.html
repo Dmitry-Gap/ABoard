@@ -23,6 +23,9 @@
                                 {% else %}
                                 {{object.user.username}}
                                 {% endif %}
+                                <span class="px-1">/</span>
+                                <a href={% url "post_edit" pk=object.id  %} class="nav-item nav-link">Posts edit</a>
+                                
                         </div>
                     <div>
                         <h3 class="mb-3">{{object.title}}</h3>
@@ -31,6 +34,9 @@
                 </div>
             </div>
                 {% include "comments.html" %}
+                {% block comment %}
+                
+                {% endblock comment %}
                 </div>
                 {% include "bar.html" %}
             </div>

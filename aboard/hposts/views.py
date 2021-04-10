@@ -1,7 +1,8 @@
 from django.shortcuts import render
 from django.urls import reverse
 from django.shortcuts import HttpResponseRedirect
-from django.views.generic import ListView, DetailView
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.views.generic import (ListView, DetailView, DeleteView, CreateView, UpdateView)
 from hposts.models import Blog, Tags, Comment
 from hposts.forms import CommentForm
 from django.shortcuts import render, get_object_or_404
@@ -14,7 +15,7 @@ from django.template.context_processors import csrf
 class AllBlogs(ListView):
     model = Blog
     template_name = "posts.html"
-    paginate_by = 3
+    paginate_by = 10
 
     def get_queryset(self):
         if self.request.GET.get("tag"):
@@ -105,3 +106,35 @@ def view_comment(request, active, post_id):
         data['comments_form'] = comments_forms
     data.update(csrf(request))
     return render('comments.html', data)
+
+
+class PostCreateView(LoginRequiredMixin, CreateView):
+    model = Blog
+    fields = ['title','text', 'tags']
+    template_name = 'post_edit.html'
+    login_url = "user_login"
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
+
+
+class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+    model = Blog
+    fields = ['title','text']
+    template_name = 'post_create.html'
+    login_url = "user_login"
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
+        
+
+    def test_func(self):
+        post = self.get_object()
+        if self.request.user == post.user:
+            return True
+        return False    
+    # def get_absolute_url(self):
+    #     return HttpResponseRedirect(reverse("hposts_page", args=(post_id, )))
+

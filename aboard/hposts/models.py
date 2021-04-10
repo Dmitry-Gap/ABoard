@@ -1,5 +1,6 @@
 from django.db import models
 from user.models import User
+from django.urls import reverse
 
 
 class Blog(models.Model):
@@ -34,6 +35,9 @@ class Blog(models.Model):
 
     def __str__(self):
         return self.title
+
+    def get_absolute_url(self):
+        return reverse("hposts_page", kwargs ={'pk': self.pk})
 
 
 class Tags(models.Model):
