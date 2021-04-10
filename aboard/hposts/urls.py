@@ -12,6 +12,7 @@ urlpatterns = [
     path("comments/add/<int:post_id>/", hposts.add_comment, name="post_comment"),
     path('new/', hposts.PostCreateView.as_view(), name='post_new'),
     path('edit/<int:pk>/', hposts.PostUpdateView.as_view(), name='post_edit'),
+    path('delete/<int:pk>/', hposts.PostDeleteView.as_view(), name='post_delete'),
 
     # path("comments/add/com/<int:post_id>/", hposts.view_comment, name="post_comment"),
 

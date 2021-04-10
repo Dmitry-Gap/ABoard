@@ -23,8 +23,15 @@
                                 {% else %}
                                 {{object.user.username}}
                                 {% endif %}
-                                <span class="px-1">/</span>
-                                <a href={% url "post_edit" pk=object.id  %} class="nav-item nav-link">Posts edit</a>
+                                {% if object.user == user %}
+                                <div class="delete-popup">
+                                <a class="btn btn-outline-secondary" href={% url "post_delete" pk=object.id  %}>Delete</a></p>
+                                </div>
+                                <a class="btn btn-outline-secondary" href={% url "post_edit" pk=object.id  %}>Edit</a></p>
+                                </div>
+                                {% endif %}
+                                {% comment %} <span class="px-1">/</span>
+                                <a href={% url "post_edit" pk=object.id  %} class="nav-item nav-link">Posts edit</a> {% endcomment %}
                                 
                         </div>
                     <div>

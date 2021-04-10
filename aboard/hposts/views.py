@@ -138,3 +138,14 @@ class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     # def get_absolute_url(self):
     #     return HttpResponseRedirect(reverse("hposts_page", args=(post_id, )))
 
+class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+    model = Blog
+    template_name = 'blog_confirm_delete.html'
+
+    success_url = '/'
+
+    def test_func(self):
+        post = self.get_object()
+        if self.request.user == post.user:
+            return True
+        return False
