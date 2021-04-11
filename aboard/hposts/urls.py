@@ -1,5 +1,7 @@
 from django.urls import path, reverse
 from django.shortcuts import redirect
+from django.conf import settings
+from django.conf.urls.static import static
 from hposts import views as hposts
 
 
@@ -14,3 +16,6 @@ urlpatterns = [
     path('delete/<int:pk>/', hposts.PostDeleteView.as_view(), name='post_delete'),
     path('comments/<int:pk>/', hposts.new_single, name="new_single"),
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -27,6 +27,13 @@ class Blog(models.Model):
         related_name="hashtags",
     )
 
+    photo = models.ImageField(
+        "Изображение",
+        upload_to="media/",
+        blank=True,
+        null=True,
+    )
+
     class Meta:
         db_table = "blogs"
         verbose_name = "Blog"

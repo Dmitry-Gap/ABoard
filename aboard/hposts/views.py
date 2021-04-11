@@ -22,7 +22,7 @@ class AllBlogs(ListView):
             return self.model.objects.filter(tags__name=self.request.GET.get("tag"))
         return super().get_queryset()
 
-    
+
 
  
     
@@ -92,7 +92,7 @@ def view_comment(request, active, post_id):
 
 class PostCreateView(LoginRequiredMixin, CreateView):
     model = Blog
-    fields = ['title','text', 'tags']
+    fields = ['title','text', 'tags', 'photo']
     template_name = 'post_edit.html'
     login_url = "user_login"
 
