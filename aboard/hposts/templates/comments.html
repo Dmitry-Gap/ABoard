@@ -129,21 +129,19 @@
         </div>
     </form>
 </section> {% endcomment %}
-    <div class="one_comment">
-        <div class="comment_date">
-            <div class="username">
-                <p>{{ data.created_on|date:"d.m.Y" }}</p>
-            </div>
-        </div>
-
-        <p class="comment_content">{{ data.comment }}</p>
-    </div>
+     {% comment %} <h4>Комментарии</h4>
+     {% for comment in comments %}
+        Пользователь - {{ comment.name }}<br>
+        {{ comment.body }} <br>
+        Добавлен - {{ comment.created }}<br><br>
+     {% endfor %} {% endcomment %}
 
 
 
 
 
 <div class="bg-light mb-3" style="padding: 30px;">
+    <a href={% url "new_single" object.id %} class="nav-link">Коментарии</a>
     <h3 class="mb-4">Коментарии</h3>
     <div id="form">
     <form

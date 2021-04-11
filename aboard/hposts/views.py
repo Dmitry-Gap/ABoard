@@ -4,7 +4,7 @@ from django.shortcuts import HttpResponseRedirect
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.views.generic import (ListView, DetailView, DeleteView, CreateView, UpdateView)
 from hposts.models import Blog, Tags, Comment
-from hposts.forms import CommentForm
+from hposts.forms import CommentForm, CommentFormAdd
 from django.shortcuts import render, get_object_or_404
 from django.contrib import messages
 from django.template.loader import render_to_string
@@ -36,6 +36,11 @@ class OneBlog(DetailView):
         context["comment_form"] = CommentForm()
         return context
 
+    def get_context_datas(self, **kwargs):
+        context = super().get_context_datas(**kwargs)
+        context["form"] = CommentFormAdd()
+        return context
+
 
 def add_comment(request, post_id):
     '''
@@ -54,37 +59,14 @@ def add_comment(request, post_id):
     
 
 
-# class OneCom(DetailView):
-#     model = Comment
-#     template_name = "comments.html"
-
-#     def get_context_data(self, **kwargs):
-#         contexts = super().get_context_data(**kwargs)
-#         contexts["comment_form"] = CommentForm()
-#         return contexts
-
-# def view_comment(request, post_id, body):
-#     template_name = "comments.html"
-#     post = get_object_or_404(Comment, post_id=post_id)
-#     comments = Comment.objects.filter(active=True).order_by("-created_on")
-#     if comment_forms.is_valid():
-#         new_comment.post = post
-#         new_comment.save()
-#         # return render(request, {'user_form': user_form } 
-#     else:
-#         comment_forms = CommentForm()
-
-#     return render(
-#         request,
-#         template_name,
-#         {
-#             "body": body,
-#             "comments": comments,
-#             # "new_comment": new_comment,
-#             "comment_forms": comment_forms,
-#         },
-#     )
-   
+def new_single(request, pk):
+    comment = Comment.objects.filter(post=pk, active=True)
+    if request:
+        form = CommentFormAdd()
+    return render(request, "add_comment_to_post.html",
+                  {
+                   "comments": comment,
+                   })
 
 
 
@@ -135,8 +117,7 @@ class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
         if self.request.user == post.user:
             return True
         return False    
-    # def get_absolute_url(self):
-    #     return HttpResponseRedirect(reverse("hposts_page", args=(post_id, )))
+
 
 class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Blog

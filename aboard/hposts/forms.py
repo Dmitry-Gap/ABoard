@@ -13,5 +13,10 @@ class CommentForm(forms.ModelForm):
         return super().save()
         
 
+class CommentFormAdd(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ('name', 'email', 'body')
+
 
 
