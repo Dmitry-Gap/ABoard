@@ -9,10 +9,6 @@ from django.dispatch.dispatcher import receiver
 
 
 
-# class  DelManage(models.Manager):
-#     def delete(self):
-#         for el in self:
-#             el.delete()
 
 class User(AbstractUser):
     def path_upload(self, filename):

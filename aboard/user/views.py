@@ -37,9 +37,6 @@ def logout_page(request):
     return HttpResponseRedirect("/home/")
 
 
-# def regist_page(request):
-    # context = {}
-    # return render(request, "registration.html", context)
 
 
 def register(request):
@@ -63,7 +60,6 @@ def edit(request):
         profile_form = ProfileEditForm(instance=request.user, data=request.POST, files=request.FILES)
         if user_form.is_valid() and profile_form.is_valid():
             user_form.save()
-            # profile = User.objects.create(user=new_user)
             profile_form.save()
             return render(request, 'edit.html', {'user_form': user_form,  'profile_form': profile_form})
     else:
