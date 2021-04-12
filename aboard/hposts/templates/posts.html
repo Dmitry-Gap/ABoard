@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% block post %}
+{% load static %}
+ 
+ <div class="single-news">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="sn-container">
+		<section class="blog-list px-3 py-5 p-md-5">
+		    <div class="container">
+			    <div class="item mb-5">
+				{% for record in object_list %}
+				    <div class="media">
+						<img src="{{MEDIA_URL}}media/{{record.photo}}" width="120" height="120" />
+					    <div class="media-body">
+						    <h3 class="title mb-1">
+							<a href={% url 'hposts_page' record.id %} rel="bookmark">{{ record.title|truncatechars:25 }}</a></h3>
+							<div class="mb-2" style="font-size: 13px;">
+								{% for tag in record.tags.all %}
+								<a href={% url 'hposts_page' %}?page=1&tag={{tag.name}}rel="category tag">{{ tag.name }}</a>
+								{% endfor %}
+								<span class="px-1">/</span>
+								<span>{{ record.create }}</span>
+								<span class="px-1">/</span>
+								<span>{{ record.user }}</span>
+							</div>
+						    <div class="intro">
+							<p>
+                            	{{ record.text|truncatechars:200 }} <a class="more-link" href={% url 'hposts_page' record.id %} ></a>
+                        	</p>
+							</div>
+						    <a class="more-link" href={% url 'hposts_page' record.id %}>Read more &rarr;</a>
+							
+					    </div>
+						
+				    </div>
+			    {% endfor %}
+				</div>
+
+			
+			    
+                    <span class="current">
+                        Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+                    </span>
+
+                    {% if page_obj.has_next %}
+                        <a href="?page={{ page_obj.next_page_number }}{% if 'tag' in request.GET %}&tag={{request.GET.tag}}{%endif%}">next</a>
+                        <a href="?page={{ page_obj.paginator.num_pages }}{% if 'tag' in request.GET %}&tag={{request.GET.tag}}{%endif%}">last &raquo;</a>
+                    {% endif %}
+				
+		    </div>
+	    </section>
+                </div>
+
+            </div>
+
+            {% include "bar.html" %}
+        </div>
+    </div>
+</div> 
+
+
+
+
+{% endblock post %}

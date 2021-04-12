@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block registration %}
+
+<div class="signup">
+
+
+    <!-- MAIN -->
+    <main class="signup__main">
+
+        <div class="container">
+            <div class="signup__container">
+                <div class="signup__head">
+                    <h3>Create a New Account</h3>
+                    <p>By singin up you can start posting, replaying to topics, earn badges, favorite, vote topics and many more.</p>
+                </div>
+
+    <form
+        class="wpcf7"
+        method="post"
+        id="contactform"
+        action={% url 'user_regist'  %}
+        >
+        {% csrf_token %}
+         {{ user_form.as_p }}
+        <div class="form-group mb-0">
+            <input type="submit" value="Отправить"
+                class="btn btn-primary font-weight-semi-bold py-2 px-3">
+        </div>
+    </form>
+
+
+
+                    {% comment %} {% csrf_token %}
+                <form action="." method="post">
+                     {{ user_form.as_p }}
+                    <p><input type="submit" value="Create my account"></p>
+                </form> {% endcomment %}
+            </div>
+        </div>
+    </main>
+
+
+</div>
+
+{% endblock registration %}

@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% block post %}
+<body>
+<div class="container-fluid py-3">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="position-relative mb-3">
+                    <img src="{{MEDIA_URL}}media/{{object.photo}}"  />
+                    <div class="overlay position-relative bg-light">
+                        <div class="mb-3">
+                            {% for tag in object.tags.all %}
+                            <a href={% url 'hposts_page' %}?page=1&tag={{tag.name}} rel="category tag">{{ tag.name }}</a>
+                            {% endfor %}
+                                <span class="px-1">/</span>
+                                <span>{{object.create}}</span>
+                                <span class="px-1">/</span>
+                                {% if object.user.first_name %}
+                                {{object.user.first_name}}
+                                {% else %}
+                                {{object.user.username}}
+                                {% endif %}
+                                {% if object.user == user %}
+                                <div class="delete-popup">
+                                <a class="btn btn-outline-secondary" href={% url "post_delete" pk=object.id  %}>Delete</a></p>
+                                <a class="btn btn-outline-secondary" href={% url "post_edit" pk=object.id  %}>Edit</a></p>
+                                </div>
+                                {% endif %}
+                        </div>
+                    <div>
+                        <h3 class="mb-3">{{object.title}}</h3>
+                        <p>{{object.text}}</p>
+                    </div>
+                </div>
+            </div>
+                {% include "comments.html" %}
+                {% block comment %}
+                
+                {% endblock comment %}
+                </div>
+                {% comment %} {% include "bar.html" %} {% endcomment %}
+            </div>
+        </div>
+    </div>
+    </div>
+</body>
+{% endblock post %}

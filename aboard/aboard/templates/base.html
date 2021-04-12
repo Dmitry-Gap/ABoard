@@ -1,0 +1,40 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="ru">
+    <head>
+        <meta charset="utf-8">
+        <title>ABoard</title>
+        <meta content="width=device-width, initial-scale=1.0" name="viewport">
+        <meta content="Bootstrap News Template - Free HTML Templates" name="keywords">
+        <meta content="Bootstrap News Template - Free HTML Templates" name="description">
+        <link href={% static "img/icon.ico" } rel="icon">
+        {% comment %} style {% endcomment %}
+        {% include "styles.html" %}
+    </head>
+    <body>
+    {% include 'topbar.html' %}
+    {% include 'brand.html' %}
+    {% include 'navbar.html' %}
+    
+    
+    {% block post %}{% endblock post %}
+
+    {% block contact %}{% endblock contact %}
+    {% block login %}{% endblock login %}
+    {% block registration %}{% endblock registration %}
+    {% block edit %}{% endblock edit %}
+    {% block createpost %}{% endblock createpost %}
+    {% block deletepost %}{% endblock deletepost %}
+    {% block editpost %}{% endblock editpost %}
+    {% block comment %}{% endblock comment %}
+
+    {% include 'footer.html' %}
+
+    {% include 'script.html' %}
+
+
+
+    <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
+    </body>
+</html>
