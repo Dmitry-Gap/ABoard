@@ -68,11 +68,11 @@ class Tags(models.Model):
 class Comment(models.Model):
     post = models.ForeignKey(Blog, on_delete=models.CASCADE, related_name="comments",
     )
-    title = models.CharField(
-        max_length=100,
-        default='',
-        verbose_name='Заголовок коментария'
-    )
+    # title = models.CharField(
+    #     max_length=100,
+    #     default='',
+    #     verbose_name='Заголовок коментария'
+    # )
     name = models.CharField(
         max_length=50,
         verbose_name="User name.",
