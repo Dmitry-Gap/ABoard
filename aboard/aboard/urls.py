@@ -22,5 +22,5 @@ urlpatterns = [
     path("home/", include("home.urls")),
     path("user/", include("user.urls")),
     path("hposts/", include("hposts.urls")),
-    path("", lambda x: redirect("home/")),
+    path("", lambda x: redirect("hposts/")),
 ]

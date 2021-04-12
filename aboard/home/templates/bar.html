@@ -1,4 +1,4 @@
-<div class="col-lg-4">
+{% comment %} <div class="col-lg-4">
     <div class="sidebar">
         <div class="sidebar-widget">
             <h2 class="sw-title">In This Category</h2>
@@ -227,14 +227,10 @@
         <div class="sidebar-widget">
             <h2 class="sw-title">Tags Cloud</h2>
             <div class="tags">
-                <a href="">National</a>
-                <a href="">International</a>
-                <a href="">Economics</a>
-                <a href="">Politics</a>
-                <a href="">Lifestyle</a>
-                <a href="">Technology</a>
-                <a href="">Trades</a>
+                {% for tag in tags.all %}
+                <a href={% url 'hposts_page' %}?page=1&tag={{tag.name}} rel="category tag">{{ tag.all }}</a>
+                {% endfor %}
             </div>
         </div>
     </div>
-</div>
+</div> {% endcomment %}

@@ -6,9 +6,7 @@
         <div class="row">
             <div class="col-lg-8">
                 <div class="position-relative mb-3">
-                    <img class="img-fluid w-100"
-                    src="img/news-700x435-2.jpg"
-                    style="object-fit: cover;">
+                    <img src="{{MEDIA_URL}}media/{{object.photo}}"  />
                     <div class="overlay position-relative bg-light">
                         <div class="mb-3">
                             {% for tag in object.tags.all %}
@@ -25,7 +23,6 @@
                                 {% if object.user == user %}
                                 <div class="delete-popup">
                                 <a class="btn btn-outline-secondary" href={% url "post_delete" pk=object.id  %}>Delete</a></p>
-                                </div>
                                 <a class="btn btn-outline-secondary" href={% url "post_edit" pk=object.id  %}>Edit</a></p>
                                 </div>
                                 {% endif %}
@@ -41,7 +38,7 @@
                 
                 {% endblock comment %}
                 </div>
-                {% include "bar.html" %}
+                {% comment %} {% include "bar.html" %} {% endcomment %}
             </div>
         </div>
     </div>

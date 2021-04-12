@@ -5,11 +5,27 @@
 	<div class="text-center">
         <div class="compose" style="text-decoration: none;"><a href="#">Posting as, <b>{{request.user}}!</b></a></div>
     </div>
-    <div class="posts"><form method="POST" class="token" autocomplete="off">{% csrf_token %}
-    	<br>
-        {{form}}
+    <div class="posts">
+    <form method="POST" class="token" autocomplete="off" enctype="multipart/form-data">
+    {% csrf_token %}
+        <div class="form-group">
+            <label for="name">Title *</label>
+                {{ form.title }}
+        </div>
+        <div class="form-group">
+            <label for="email">Text *</label>
+                {{ form.text }}
+        </div>
+
+        </div>
+        <div class="form-group">
+            <label for="email">Text *</label>
+                {{ form.photo }}
+        </div>
+        <br>
+        {% comment %} {{form}} {% endcomment %}
         <center><button type="submit" class="submit">POST</button></center>
     </form></div>
-    </div>
+</div>
 
 {% endblock createpost %}

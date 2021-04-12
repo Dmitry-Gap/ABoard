@@ -1,11 +1,12 @@
 {% extends 'base.html' %}
 {% block comment %}
  </div>
+
 <h4>Комментарии</h4>
      {% for comment in comments %}
         Пользователь - {{ comment.name }}<br>
-        {{ comment.body }} <br>
-        Добавлен - {{ comment.created_on }}<br><br>
+        Добавлен - {{ comment.created_on }}<br>
+        Коментарий -{{ comment.body }} <br><br>
      {% endfor %}
     </div>
 {% endblock comment %}

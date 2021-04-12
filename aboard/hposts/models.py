@@ -23,6 +23,7 @@ class Blog(models.Model):
     )
     tags = models.ManyToManyField(
         "Tags",
+        blank=True,
         verbose_name="#hashtag",
         related_name="hashtags",
     )

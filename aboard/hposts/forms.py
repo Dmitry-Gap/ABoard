@@ -18,5 +18,8 @@ class CommentFormAdd(forms.ModelForm):
         model = Comment
         fields = ('name', 'email', 'body')
 
-
+class Img(forms.ModelForm):
+    class Meta:
+        model = Blog
+        fields = ('photo', )
 

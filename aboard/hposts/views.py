@@ -24,7 +24,8 @@ class AllBlogs(ListView):
 
 
 
- 
+
+
     
 
 class OneBlog(DetailView):
@@ -100,10 +101,17 @@ class PostCreateView(LoginRequiredMixin, CreateView):
         form.instance.user = self.request.user
         return super().form_valid(form)
 
+    def img(request):
+        if request.method == 'POST':
+            img_form = Img(instance=request.user, data=request.POST, files=request.FILES)
+            if img_form.is_valid():
+                img_form.save()
+                return render(request, template_name, {'img_form': img_form,})
+
 
 class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Blog
-    fields = ['title','text']
+    fields = ['title','text', 'photo']
     template_name = 'post_create.html'
     login_url = "user_login"
 
@@ -123,7 +131,7 @@ class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Blog
     template_name = 'blog_confirm_delete.html'
 
-    success_url = '/'
+    success_url = '/hposts/'
 
     def test_func(self):
         post = self.get_object()

@@ -12,30 +12,25 @@
 			    <div class="item mb-5">
 				{% for record in object_list %}
 				    <div class="media">
-						<img src="/media/{{photo}}" />
-					     {% comment %} <img class="mr-3 img-fluid post-thumb d-none d-md-flex" src={% static "img/blog/blog-post-thumb-1.jpg" %} alt="image">  {% endcomment %}
+						<img src="{{MEDIA_URL}}media/{{record.photo}}" width="120" height="120" />
 					    <div class="media-body">
 						    <h3 class="title mb-1">
-							<a href={% url 'hposts_page' record.id %} rel="bookmark">{{ record.title|truncatechars:20 }}</a></h3>
+							<a href={% url 'hposts_page' record.id %} rel="bookmark">{{ record.title|truncatechars:25 }}</a></h3>
 							<div class="mb-2" style="font-size: 13px;">
 								{% for tag in record.tags.all %}
 								<a href={% url 'hposts_page' %}?page=1&tag={{tag.name}}rel="category tag">{{ tag.name }}</a>
 								{% endfor %}
 								<span class="px-1">/</span>
 								<span>{{ record.create }}</span>
+								<span class="px-1">/</span>
+								<span>{{ record.user }}</span>
 							</div>
-							<span class="cat-links">
-                        	Posted in
-                        	{% for tag in record.tags.all %}
-                        	<a href={% url 'hposts_page' %}?page=1&tag={{tag.name}}rel="category tag">{{ tag.name }}</a>,
-                        	{% endfor %}
-                        	</span>
 						    <div class="intro">
 							<p>
                             	{{ record.text|truncatechars:200 }} <a class="more-link" href={% url 'hposts_page' record.id %} ></a>
                         	</p>
 							</div>
-						    <a class="more-link" href="blog-post.html">Read more &rarr;</a>
+						    <a class="more-link" href={% url 'hposts_page' record.id %}>Read more &rarr;</a>
 							
 					    </div>
 						
