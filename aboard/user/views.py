@@ -7,7 +7,7 @@ from user.models import User
 
 def login_page(request):
     if request.user.is_authenticated:
-        return HttpResponseRedirect("/home")
+        return HttpResponseRedirect("/hposts/")
     context = {
         "form": UserForm(),
     }
@@ -34,12 +34,9 @@ def login_page(request):
 @dec.login_required(login_url="/user/login/")
 def logout_page(request):
     logout(request)
-    return HttpResponseRedirect("/home/")
+    return HttpResponseRedirect("/hposts/")
 
 
-# def regist_page(request):
-    # context = {}
-    # return render(request, "registration.html", context)
 
 
 def register(request):
@@ -63,7 +60,6 @@ def edit(request):
         profile_form = ProfileEditForm(instance=request.user, data=request.POST, files=request.FILES)
         if user_form.is_valid() and profile_form.is_valid():
             user_form.save()
-            # profile = User.objects.create(user=new_user)
             profile_form.save()
             return render(request, 'edit.html', {'user_form': user_form,  'profile_form': profile_form})
     else:

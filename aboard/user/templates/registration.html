@@ -4,14 +4,13 @@
 <div class="signup">
 
 
-    <!-- MAIN -->
     <main class="signup__main">
 
         <div class="container">
             <div class="signup__container">
                 <div class="signup__head">
                     <h3>Create a New Account</h3>
-                    <p>By singin up you can start posting, replaying to topics, earn badges, favorite, vote topics and many more.</p>
+                    <p>By singin up you can start posting, replaying to topics.</p>
                 </div>
 
     <form
@@ -30,11 +29,7 @@
 
 
 
-                    {% comment %} {% csrf_token %}
-                <form action="." method="post">
-                     {{ user_form.as_p }}
-                    <p><input type="submit" value="Create my account"></p>
-                </form> {% endcomment %}
+
             </div>
         </div>
     </main>
