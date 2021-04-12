@@ -4,7 +4,8 @@
 
 <h4>Комментарии</h4>
      {% for comment in comments %}
-        Пользователь - {{ comment.name }}<br>
+      Пользователь - <img src="{{MEDIA_ROOT}}/hposts/media/{{user.photo}}" width="90"  height="90"/>
+        {{ comment.name }}<br>
         Добавлен - {{ comment.created_on }}<br>
         Коментарий -{{ comment.body }} <br><br>
      {% endfor %}
