@@ -7,7 +7,7 @@ from user.models import User
 
 def login_page(request):
     if request.user.is_authenticated:
-        return HttpResponseRedirect("/home")
+        return HttpResponseRedirect("/hposts/")
     context = {
         "form": UserForm(),
     }
@@ -34,7 +34,7 @@ def login_page(request):
 @dec.login_required(login_url="/user/login/")
 def logout_page(request):
     logout(request)
-    return HttpResponseRedirect("/home/")
+    return HttpResponseRedirect("/hposts/")
 
 
 
